@@ -1,3 +1,37 @@
+# Directory structure
 data/
 venv/
+
+# Code organization rules
+sql/              # SQL schema and queries
+docs/             # Documentation files
+.notes/           # Project notes and planning
+tests/            # Test files
+src/              # Source code
+
+# Naming conventions
+- SQL files: lowercase with underscores (e.g., organization_schema.sql)
+- Documentation: lowercase with underscores (e.g., organization_def.md)
+- Source files: lowercase with underscores
+- Test files: test_*.py for Python test files
+
+# Code style
+- SQL: 
+  - Keywords in UPPERCASE
+  - Indentation: 4 spaces
+  - Max line length: 120 characters
+  
+- Markdown:
+  - Use headers properly (h1 -> h6)
+  - Code blocks with language specification
+  - Links to other docs when relevant
+
+# Documentation rules
+- Each major component needs documentation
+- README.md in each main directory
+- API documentation for all public interfaces
+- Update docs when changing schema
+- Always consider .notes/ directory content when making changes
+- .notes/ directory contains project context and planning information
+- Reference relevant .notes/ files in commit messages when applicable
 
