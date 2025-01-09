@@ -1,36 +1,34 @@
 from fastapi import APIRouter
-from . import endpoints
+from .endpoints import organization, department, employee, position, team
 
-# Create main API router
 api_router = APIRouter()
 
-# Include all endpoint routers
 api_router.include_router(
-    endpoints.organization.router,
+    organization.router,
     prefix="/organizations",
     tags=["organizations"]
 )
 
 api_router.include_router(
-    endpoints.department.router,
+    department.router,
     prefix="/departments",
     tags=["departments"]
 )
 
 api_router.include_router(
-    endpoints.employee.router,
+    employee.router,
     prefix="/employees",
     tags=["employees"]
 )
 
 api_router.include_router(
-    endpoints.position.router,
+    position.router,
     prefix="/positions",
     tags=["positions"]
 )
 
 api_router.include_router(
-    endpoints.team.router,
+    team.router,
     prefix="/teams",
     tags=["teams"]
-)
+) 

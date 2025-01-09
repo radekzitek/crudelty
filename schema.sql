@@ -44,7 +44,7 @@ CREATE TABLE Employee (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Position table
-CREATE TABLE Position (
+CREATE TABLE PositionJob (
     PositionID BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(255) NOT NULL,
     Description TEXT,
@@ -116,7 +116,7 @@ ALTER TABLE Employee
     FOREIGN KEY (OrganizationID) REFERENCES Organization(OrganizationID)
     ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE Position
+ALTER TABLE PositionJob
     ADD CONSTRAINT fk_pos_dept
     FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
     ON DELETE CASCADE ON UPDATE CASCADE;
@@ -137,7 +137,7 @@ ALTER TABLE EmployeePosition
     FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
     ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT fk_emp_pos_position
-    FOREIGN KEY (PositionID) REFERENCES Position(PositionID)
+    FOREIGN KEY (PositionID) REFERENCES PositionJob(PositionID)
     ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE TeamMember
