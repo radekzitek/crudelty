@@ -172,5 +172,17 @@ def get_db_info():
         logger.error(f"Error getting database information: {str(e)}")
         return False
 
+async def check_db_health(db_session) -> tuple[bool, str]:
+    """Check database connectivity and return status"""
+    try:
+        # Get database version
+        result = await db_session.execute(text("SELECT VERSION()"))
+        version = result.scalar()
+        await db_session.commit()
+        return True, f"Connected to MySQL version: {version}"
+    except Exception as e:
+        logger.error(f"Database health check failed: {e}")
+        return False, f"Database error: {str(e)}"
+
 # Export commonly used database components
 __all__ = ['engine', 'Base', 'get_db', 'get_db_session', 'get_db_info'] 

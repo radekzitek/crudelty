@@ -20,9 +20,9 @@ logger.debug("Environment file loaded")
 class Settings(BaseSettings):
     """Application settings"""
     # App settings
-    APP_NAME: str 
-    DEBUG: bool 
-    API_V1_PREFIX: str 
+    APP_NAME: str = "Organization Management API"
+    DEBUG: bool = False
+    API_V1_PREFIX: str = "/api/v1"
     
     # Database settings
     DATABASE_URL: str
@@ -49,6 +49,9 @@ class Settings(BaseSettings):
     #LOG_ROTATE_DAYS: int 
     LOG_ROTATE_WHEN: str 
     LOG_ROTATE_INTERVAL: int 
+    
+    # Redis
+    REDIS_URL: str = "redis://localhost:6379/0"
     
     class Config:
         env_file = env_file
