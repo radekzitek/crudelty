@@ -5,6 +5,7 @@ from typing import Optional
 import os
 from dotenv import load_dotenv
 
+
 # Determine environment
 ENV = os.getenv("ENV", "development")
 
@@ -22,14 +23,14 @@ class Settings(BaseSettings):
     
     # Database settings
     DATABASE_URL: str
-    DB_POOL_SIZE: int = 5
-    DB_MAX_OVERFLOW: int = 10
-    DB_POOL_TIMEOUT: int = 30
-    DB_POOL_RECYCLE: int = 1800
-    DB_ECHO: bool = False
-    DB_ECHO_POOL: bool = False
-    DB_RETRY_LIMIT: int = 3
-    DB_RETRY_DELAY: int = 1  # seconds
+    DB_POOL_SIZE: int
+    DB_MAX_OVERFLOW: int
+    DB_POOL_TIMEOUT: int
+    DB_POOL_RECYCLE: int
+    DB_ECHO: bool
+    DB_ECHO_POOL: bool
+    DB_RETRY_LIMIT: int
+    DB_RETRY_DELAY: int
     
     # Security
     SECRET_KEY: str
@@ -50,7 +51,6 @@ class Settings(BaseSettings):
         env_file = env_file
         case_sensitive = True
 
-@lru_cache()
 def get_settings() -> Settings:
     """Get cached settings instance"""
     return Settings()

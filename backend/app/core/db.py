@@ -1,7 +1,8 @@
 from sqlalchemy import create_engine, text
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.pool import QueuePool
 from urllib.parse import urlparse
+from contextlib import contextmanager
 from .config import get_settings
 from .logger import setup_logger
 
@@ -46,6 +47,48 @@ try:
 except Exception as e:
     logger.error(f"Failed to create database engine: {str(e)}")
     raise
+
+# Create session factory
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# Create Base class for declarative models
+Base = declarative_base()
+
+@contextmanager
+def get_db():
+    """
+    Context manager for database sessions.
+    Usage:
+        with get_db() as db:
+            db.query(Model).all()
+    """
+    db = SessionLocal()
+    try:
+        logger.debug("Creating new database session")
+        yield db
+        db.commit()
+        logger.debug("Session committed successfully")
+    except Exception as e:
+        db.rollback()
+        logger.error(f"Session rollback due to error: {str(e)}")
+        raise
+    finally:
+        logger.debug("Closing database session")
+        db.close()
+
+def get_db_session():
+    """
+    Dependency for FastAPI endpoints.
+    Usage:
+        @app.get("/items/")
+        def read_items(db: Session = Depends(get_db_session)):
+            return db.query(Model).all()
+    """
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 def get_db_info():
     """Get database structure information"""
@@ -129,5 +172,5 @@ def get_db_info():
         logger.error(f"Error getting database information: {str(e)}")
         return False
 
-# Initialize connection and log database info
-get_db_info() 
+# Export commonly used database components
+__all__ = ['engine', 'Base', 'get_db', 'get_db_session', 'get_db_info'] 

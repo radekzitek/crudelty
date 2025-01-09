@@ -1,8 +1,8 @@
 # backend/app/app.py
 from fastapi import FastAPI
-from .core.config import get_settings
 from .core.logger import setup_logger
-from .core.db import get_db_info
+from .core.config import get_settings
+from .core.db import get_db
 from . import __version__
 
 # Setup logging first
@@ -14,7 +14,9 @@ logger.debug("Settings:")
 for key, value in settings.model_dump().items():
     logger.debug(f"  - {key}: {value}")
 
-get_db_info()
+with get_db() as db:
+    logger.debug("Database connection established")
+    #get_db_info()
 
 app = FastAPI(
     title=settings.APP_NAME,
