@@ -1,0 +1,6 @@
+python-dotenv
+pydantic-settings
+sqlalchemy
+mariadb
+pymysql
+cryptography

@@ -1,5 +1,6 @@
 # Project specific
 data/
+logs/
 
 # Python
 .venv/
@@ -24,6 +25,7 @@ __pycache__/
 # Environment
 .env
 .env.*
+
 !.env.example
 
 # Build
