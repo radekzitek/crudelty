@@ -22,6 +22,14 @@ class Settings(BaseSettings):
     
     # Database settings
     DATABASE_URL: str
+    DB_POOL_SIZE: int = 5
+    DB_MAX_OVERFLOW: int = 10
+    DB_POOL_TIMEOUT: int = 30
+    DB_POOL_RECYCLE: int = 1800
+    DB_ECHO: bool = False
+    DB_ECHO_POOL: bool = False
+    DB_RETRY_LIMIT: int = 3
+    DB_RETRY_DELAY: int = 1  # seconds
     
     # Security
     SECRET_KEY: str
@@ -32,9 +40,9 @@ class Settings(BaseSettings):
     LOG_LEVEL: str 
     LOG_FORMAT: str 
     LOG_FILE: Optional[str] 
-    LOG_ROTATE_SIZE: int 
+    #LOG_ROTATE_SIZE: int 
     LOG_ROTATE_BACKUPS: int 
-    LOG_ROTATE_DAYS: int 
+    #LOG_ROTATE_DAYS: int 
     LOG_ROTATE_WHEN: str 
     LOG_ROTATE_INTERVAL: int 
     

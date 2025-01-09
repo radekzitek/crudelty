@@ -1,6 +1,7 @@
 python-dotenv
 pydantic-settings
+fastapi
+uvicorn
 sqlalchemy
-mariadb
 pymysql
-cryptography
+

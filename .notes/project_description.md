@@ -32,7 +32,7 @@
 
 ## Database:
 
-- MariaDB
+- MySQL
 
 ## Backend:
 
