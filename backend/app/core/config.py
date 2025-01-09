@@ -1,19 +1,22 @@
 # backend/app/core/config.py
-from functools import lru_cache
+from logging import getLogger
 from pydantic_settings import BaseSettings
 from typing import Optional
 import os
 from dotenv import load_dotenv
 
+logger = getLogger(__name__)
+logger.debug("About to load settings")
 
 # Determine environment
 ENV = os.getenv("ENV", "development")
-
+logger.debug(f"Environment: {ENV}")
 # Load appropriate .env file
 env_file = f".env.{ENV}" if os.path.exists(f".env.{ENV}") else ".env"
+logger.debug(f"Loading environment file: {env_file}")
 
 load_dotenv(env_file)
-
+logger.debug("Environment file loaded")
 class Settings(BaseSettings):
     """Application settings"""
     # App settings
@@ -53,4 +56,5 @@ class Settings(BaseSettings):
 
 def get_settings() -> Settings:
     """Get cached settings instance"""
+    logger.debug("About to return settings")
     return Settings()

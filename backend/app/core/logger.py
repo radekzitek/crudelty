@@ -45,6 +45,7 @@ def setup_logger(name: str) -> logging.Logger:
         time_handler.setLevel(settings.LOG_LEVEL)
         logger.addHandler(time_handler)
     
+    logger.debug("----------------------------------- RESRART ----------------------------------------")
     logger.debug(f"Logger setup complete. Log level {settings.LOG_LEVEL}")
     if settings.LOG_FILE:
         logger.debug(f"Log file: {settings.LOG_FILE}")

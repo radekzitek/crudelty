@@ -7,7 +7,6 @@ from . import __version__
 
 # Setup logging first
 logger = setup_logger(__name__)
-logger.debug("----------------------------------- RESTART----------------------------------------")
 # Load settings
 settings = get_settings()
 logger.debug("Settings:")
